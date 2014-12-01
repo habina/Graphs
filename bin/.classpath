@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="testing/trip-classes/|testing/graph-classes/|testing/make-classes/" kind="src" path=""/>
+	<classpathentry kind="src" path="testing/graph-classes"/>
+	<classpathentry kind="src" path="testing/make-classes"/>
+	<classpathentry kind="src" path="testing/trip-classes"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/MrChen/cs61b-software/lib/ucb.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
