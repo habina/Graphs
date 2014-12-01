@@ -22,14 +22,14 @@ package graph;
  *
  *  Edges in a Graph are ordered by the sequence in which they were added.
  *
- *  @author
+ *  @author Dasheng Chen
  */
 public abstract class Graph {
 
     /** Returns the number of vertices in me. */
     public abstract int vertexSize();
 
-    /** Returns my maximum vertex number, or 0 if I am empty. */
+    /** Returns my maximum vertex number, or 0 if I am empty.*/
     public abstract int maxVertex();
 
     /** Returns the number of edges in me. */

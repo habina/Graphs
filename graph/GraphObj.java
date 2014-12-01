@@ -5,7 +5,7 @@ package graph;
 /** A partial implementation of Graph containing elements common to
  *  directed and undirected graphs.
  *
- *  @author
+ *  @author Dasheng Chen
  */
 abstract class GraphObj extends Graph {
 

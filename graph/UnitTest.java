@@ -9,7 +9,7 @@ import ucb.junit.textui;
 
 /** Unit tests for the graph package.  This class serves to dispatch
  *  other test classes, which are listed in the argument to runClasses.
- *  @author
+ *  @author Dasheng Chen
  */
 public class UnitTest {
 
