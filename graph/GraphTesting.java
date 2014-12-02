@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
  */
 public class GraphTesting {
 
-    // Add tests.  Here's a sample.
     @Test
     public void testAdd() {
         DirectedGraph g = new DirectedGraph();
@@ -202,7 +201,7 @@ public class GraphTesting {
         uDGraph.add(1, 2);
         uDGraph.add(1, 3);
         assertEquals(2, uDGraph.degree(1));
-        assertEquals(0, uDGraph.degree(3));
+        assertEquals(1, uDGraph.degree(3));
         uDGraph.add(3, 1);
         assertEquals(1, uDGraph.degree(3));
     }
@@ -318,11 +317,13 @@ public class GraphTesting {
         assertEquals(2, uDGraph.neighbor(1, 0));
         assertEquals(3, uDGraph.neighbor(1, 1));
         uDGraph.add(2, 3);
-        assertEquals(3, uDGraph.neighbor(2, 0));
+        assertEquals(1, uDGraph.neighbor(2, 0));
+        assertEquals(3, uDGraph.neighbor(2, 1));
         uDGraph.remove(1);
         assertEquals(0, uDGraph.neighbor(1, 1));
         uDGraph.remove(2, 3);
         assertEquals(0, uDGraph.neighbor(2, 0));
+        assertEquals(0, uDGraph.neighbor(2, 1));
     }
     
     @Test
@@ -389,8 +390,10 @@ public class GraphTesting {
         assertEquals(2, iter.next().intValue());
         assertEquals(3, iter.next().intValue());
         iter = uDGraph.successors(2);
+        assertEquals(1, iter.next().intValue());
         assertEquals(4, iter.next().intValue());
         assertEquals(3, iter.next().intValue());
+        assertEquals(false, iter.hasNext());
     }
     
     @Test
@@ -453,28 +456,30 @@ public class GraphTesting {
     @Test
     public void testEdgeId() {
         DirectedGraph dGraph = new DirectedGraph();
+        assertEquals(0, dGraph.edgeId(1, 2));
         dGraph.add();
         dGraph.add();
         dGraph.add();
         dGraph.add(1, 2);
         dGraph.add(1, 3);
         dGraph.add(3, 2);
-        assertEquals(0, dGraph.edgeId(1, 2));
-        assertEquals(1, dGraph.edgeId(1, 3));
-        assertEquals(2, dGraph.edgeId(3, 2));
+        assertEquals(1, dGraph.edgeId(1, 2));
+        assertEquals(2, dGraph.edgeId(1, 3));
+        assertEquals(3, dGraph.edgeId(3, 2));
         UndirectedGraph uDGraph = new UndirectedGraph();
+        assertEquals(0, uDGraph.edgeId(1, 2));
         uDGraph.add();
         uDGraph.add();
         uDGraph.add();
         uDGraph.add(1, 2);
         uDGraph.add(1, 3);
         uDGraph.add(3, 2);
-        assertEquals(0, uDGraph.edgeId(1, 2));
-        assertEquals(1, uDGraph.edgeId(2, 1));
-        assertEquals(2, uDGraph.edgeId(1, 3));
-        assertEquals(3, uDGraph.edgeId(3, 1));
-        assertEquals(4, uDGraph.edgeId(3, 2));
-        assertEquals(5, uDGraph.edgeId(2, 3));
+        assertEquals(1, uDGraph.edgeId(1, 2));
+        assertEquals(2, uDGraph.edgeId(2, 1));
+        assertEquals(3, uDGraph.edgeId(1, 3));
+        assertEquals(4, uDGraph.edgeId(3, 1));
+        assertEquals(5, uDGraph.edgeId(3, 2));
+        assertEquals(6, uDGraph.edgeId(2, 3));
     }
 
     @Test
