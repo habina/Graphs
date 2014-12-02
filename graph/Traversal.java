@@ -4,6 +4,7 @@ package graph;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Queue;
 
 /** Implements a generalized traversal of a graph.  At any given time,
@@ -23,7 +24,7 @@ import java.util.Queue;
  *
  *  Traversals may be interrupted or restarted, remembering the previously
  *  marked vertices.
- *  @author
+ *  @author Dasheng Chen
  */
 public abstract class Traversal {
 
@@ -93,6 +94,9 @@ public abstract class Traversal {
     private final Graph _G;
     /** The fringe. */
     protected final Queue<Integer> _fringe;
+    /** Vertex that visited. */
+    private HashSet<Integer> _visited;
+    
     // FIXME
 
 }

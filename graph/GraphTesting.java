@@ -437,14 +437,8 @@ public class GraphTesting {
         assertEquals(1, tmp[0]);
         assertEquals(2, tmp[1]);
         tmp = iter.next();
-        assertEquals(2, tmp[0]);
-        assertEquals(1, tmp[1]);
-        tmp = iter.next();
         assertEquals(1, tmp[0]);
         assertEquals(3, tmp[1]);
-        tmp = iter.next();
-        assertEquals(3, tmp[0]);
-        assertEquals(1, tmp[1]);
         assertEquals(false, iter.hasNext());
     }
     
@@ -475,11 +469,11 @@ public class GraphTesting {
         uDGraph.add(1, 3);
         uDGraph.add(3, 2);
         assertEquals(1, uDGraph.edgeId(1, 2));
-        assertEquals(2, uDGraph.edgeId(2, 1));
-        assertEquals(3, uDGraph.edgeId(1, 3));
-        assertEquals(4, uDGraph.edgeId(3, 1));
-        assertEquals(5, uDGraph.edgeId(3, 2));
-        assertEquals(6, uDGraph.edgeId(2, 3));
+        assertEquals(1, uDGraph.edgeId(2, 1));
+        assertEquals(2, uDGraph.edgeId(1, 3));
+        assertEquals(2, uDGraph.edgeId(3, 1));
+        assertEquals(3, uDGraph.edgeId(3, 2));
+        assertEquals(3, uDGraph.edgeId(2, 3));
     }
 
     @Test
