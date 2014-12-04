@@ -4,10 +4,10 @@ package graph;
 
 import java.util.List;
 
-/** The shortest paths through an edge-weighted labeled graph of type GRAPHTYPE.
+/** The shortest paths through an edge-weighted graph.
  *  By overrriding methods getWeight, setWeight, getPredecessor, and
- *  setPredecessor, the client can determine how to get parameters of the
- *  search and to return results.  By overriding estimatedDistance, clients
+ *  setPredecessor, the client can determine how to represent the weighting
+ *  and the search results.  By overriding estimatedDistance, clients
  *  can search for paths to specific destinations using A* search.
  *  @author
  */

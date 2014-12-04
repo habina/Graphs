@@ -278,8 +278,8 @@ public class GraphTesting {
         dGraph.add();
         dGraph.add(1, 2);
         dGraph.add(1, 3);
-        assertEquals(2, dGraph.successor(1, 0));
-        assertEquals(3, dGraph.successor(1, 1));
+        assertEquals(3, dGraph.successor(1, 0));
+        assertEquals(2, dGraph.successor(1, 1));
         dGraph.add(2, 3);
         assertEquals(3, dGraph.successor(2, 0));
         dGraph.remove(1);
@@ -298,8 +298,8 @@ public class GraphTesting {
         assertEquals(0, dGraph.predecessor(2, 1));
         dGraph.add(2, 1);
         dGraph.add(3, 1);
-        assertEquals(2, dGraph.predecessor(1, 0));
-        assertEquals(3, dGraph.predecessor(1, 1));
+        assertEquals(3, dGraph.predecessor(1, 0));
+        assertEquals(2, dGraph.predecessor(1, 1));
         dGraph.add(1, 2);
         assertEquals(1, dGraph.predecessor(2, 0));
     }
@@ -314,11 +314,11 @@ public class GraphTesting {
         uDGraph.add();
         uDGraph.add(1, 2);
         uDGraph.add(1, 3);
-        assertEquals(2, uDGraph.neighbor(1, 0));
-        assertEquals(3, uDGraph.neighbor(1, 1));
+        assertEquals(3, uDGraph.neighbor(1, 0));
+        assertEquals(2, uDGraph.neighbor(1, 1));
         uDGraph.add(2, 3);
-        assertEquals(1, uDGraph.neighbor(2, 0));
-        assertEquals(3, uDGraph.neighbor(2, 1));
+        assertEquals(3, uDGraph.neighbor(2, 0));
+        assertEquals(1, uDGraph.neighbor(2, 1));
         uDGraph.remove(1);
         assertEquals(0, uDGraph.neighbor(1, 1));
         uDGraph.remove(2, 3);
@@ -340,11 +340,11 @@ public class GraphTesting {
         dGraph.add(2, 4);
         dGraph.add(2, 3);
         Iteration<Integer> iter = dGraph.successors(1);
+        assertEquals(3, iter.next().intValue());
         assertEquals(2, iter.next().intValue());
-        assertEquals(3, iter.next().intValue());
         iter = dGraph.successors(2);
-        assertEquals(4, iter.next().intValue());
         assertEquals(3, iter.next().intValue());
+        assertEquals(4, iter.next().intValue());
         assertEquals(false, iter.hasNext());
     }
     
@@ -363,11 +363,11 @@ public class GraphTesting {
         dGraph.add(2, 3);
         dGraph.add(2, 4);
         Iteration<Integer> iter = dGraph.predecessors(2);
+        assertEquals(1, iter.next().intValue());
         assertEquals(3, iter.next().intValue());
-        assertEquals(1, iter.next().intValue());
         iter = dGraph.predecessors(3);
-        assertEquals(1, iter.next().intValue());
         assertEquals(2, iter.next().intValue());
+        assertEquals(1, iter.next().intValue());
         iter = dGraph.predecessors(4);
         assertEquals(2, iter.next().intValue());
         assertEquals(false, iter.hasNext());
@@ -387,12 +387,12 @@ public class GraphTesting {
         uDGraph.add(2, 4);
         uDGraph.add(2, 3);
         Iteration<Integer> iter = uDGraph.neighbors(1);
+        assertEquals(3, iter.next().intValue());
         assertEquals(2, iter.next().intValue());
-        assertEquals(3, iter.next().intValue());
         iter = uDGraph.successors(2);
-        assertEquals(1, iter.next().intValue());
-        assertEquals(4, iter.next().intValue());
         assertEquals(3, iter.next().intValue());
+        assertEquals(4, iter.next().intValue());
+        assertEquals(1, iter.next().intValue());
         assertEquals(false, iter.hasNext());
     }
     

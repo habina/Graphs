@@ -2,9 +2,9 @@ package graph;
 
 /* See restrictions in Graph.java. */
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Queue;
 
 /** Implements a generalized traversal of a graph.  At any given time,
@@ -32,16 +32,31 @@ public abstract class Traversal {
     protected Traversal(Graph G, Queue<Integer> fringe) {
         _G = G;
         _fringe = fringe;
+        _visited = new ArrayList<Integer>();
     }
 
     /** Unmark all vertices in the graph. */
     public void clear() {
         // FIXME
+        _visited.clear();
     }
 
     /** Initialize the fringe to V0 and perform a traversal. */
     public void traverse(Collection<Integer> V0) {
         // FIXME
+        _fringe.addAll(V0);
+        while (!_fringe.isEmpty()) {
+            int v = _fringe.poll();
+            if (!marked(v)) {
+                this.mark(v);
+                this.visit(v);
+                for(Integer i : this._G.successors(v)) {
+                    if (!marked(i)) {
+                        _fringe.add(i);
+                    }
+                }
+            }
+        }
     }
 
     /** Initialize the fringe to { V0 } and perform a traversal. */
@@ -52,12 +67,13 @@ public abstract class Traversal {
     /** Returns true iff V has been marked. */
     protected boolean marked(int v) {
         // FIXME
-        return false;
+        return _visited.contains(v);
     }
 
     /** Mark vertex V. */
     protected void mark(int v) {
         // FIXME
+        _visited.add(v);
     }
 
     /** Perform a visit on vertex V.  Returns false iff the traversal is to
@@ -95,7 +111,7 @@ public abstract class Traversal {
     /** The fringe. */
     protected final Queue<Integer> _fringe;
     /** Vertex that visited. */
-    private HashSet<Integer> _visited;
+    private ArrayList<Integer> _visited;
     
     // FIXME
 

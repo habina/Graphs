@@ -107,8 +107,10 @@ abstract class GraphObj extends Graph {
             int avalId = _pqEdgeId.poll();
             GraphNode uNode = _nodeMap.get(u);
             GraphNode vNode = _nodeMap.get(v);
-            uNode.successor.add(v);
-            vNode.predecessor.add(u);
+            uNode.successor.addFirst(v);
+            vNode.predecessor.addFirst(u);
+//            uNode.successor.add(v);
+//            vNode.predecessor.add(u);
             if (isDirected()) {
                 _edgesList.add(new int[]{u, v});
                 _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(u, v), avalId);
@@ -117,8 +119,8 @@ abstract class GraphObj extends Graph {
                 int smaller = Math.min(u, v);
                 _edgesList.add(new int[]{smaller, larger});
                 _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(smaller, larger), avalId);
-                uNode.predecessor.add(v);
-                vNode.successor.add(u);
+                uNode.predecessor.addFirst(v);
+                vNode.successor.addFirst(u);
             }
             if (_pqEdgeId.isEmpty()) {
                 _pqEdgeId.offer(_edgesList.size() + 1);

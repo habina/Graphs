@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayDeque;
+
 /* See restrictions in Graph.java. */
 
 /** Implements a breadth-first traversal of a graph.  Generally, the
@@ -11,7 +13,7 @@ public class BreadthFirstTraversal extends Traversal {
 
     /** A depth-first Traversal of G, using FRINGE as the fringe. */
     protected BreadthFirstTraversal(Graph G) {
-        super(G, null);
+        super(G, deque);
         // FIXME
     }
 
@@ -20,4 +22,5 @@ public class BreadthFirstTraversal extends Traversal {
         return super.visit(v);
     }
 
+    private static ArrayDeque<Integer> deque = new ArrayDeque<Integer>();
 }
