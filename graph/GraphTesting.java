@@ -431,7 +431,10 @@ public class GraphTesting {
         uDGraph.add();
         uDGraph.add();
         uDGraph.add(1, 2);
+        uDGraph.add(1, 2);
+        uDGraph.add(2, 1);
         uDGraph.add(1, 3);
+        uDGraph.add(3, 1);
         iter = uDGraph.edges();
         tmp = iter.next();
         assertEquals(1, tmp[0]);

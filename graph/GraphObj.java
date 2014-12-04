@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -162,25 +163,25 @@ abstract class GraphObj extends Graph {
         if (contains(v)) {
             GraphNode gn = _nodeMap.get(v);
             for (Integer preVertex : gn.predecessor) {
-                ArrayList<Integer> suc = _nodeMap.get(preVertex).successor;
+                ArrayDeque<Integer> suc = _nodeMap.get(preVertex).successor;
                 SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(preVertex, v);
                 if (_edgesID.containsKey(key)) {
                     int oldId = _edgesID.get(key);
                     _pqEdgeId.add(oldId);
                     _edgesID.remove(key);
                 }
-                suc.remove(suc.indexOf(v));
+                suc.remove(v);
                 _edgesList.remove(indexEdges(preVertex, v));
             }
             for (Integer sucVertex : gn.successor) {
-                ArrayList<Integer> prd = _nodeMap.get(sucVertex).predecessor;
+                ArrayDeque<Integer> prd = _nodeMap.get(sucVertex).predecessor;
                 SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(v, sucVertex);
                 if (_edgesID.containsKey(key)) {
                     int oldId = _edgesID.get(key);
                     _pqEdgeId.add(oldId);
                     _edgesID.remove(key);
                 }
-                prd.remove(prd.indexOf(v));
+                prd.remove(v);
                 if (isDirected()) {
                     _edgesList.remove(indexEdges(v, sucVertex));
                 }
@@ -196,13 +197,13 @@ abstract class GraphObj extends Graph {
         GraphNode uNode = _nodeMap.get(u);
         GraphNode vNode = _nodeMap.get(v);
         if (uNode != null && vNode != null && containsEdges(u, v)) {
-            uNode.successor.remove(uNode.successor.indexOf(v));
-            vNode.predecessor.remove(vNode.predecessor.indexOf(u));
+            uNode.successor.remove(v);
+            vNode.predecessor.remove(u);
             if (isDirected()) {
                 _edgesList.remove(indexEdges(u, v));
             } else {
-                uNode.predecessor.remove(uNode.predecessor.indexOf(v));
-                vNode.successor.remove(vNode.successor.indexOf(u));
+                uNode.predecessor.remove(v);
+                vNode.successor.remove(u);
                 int larger = Math.max(u, v);
                 int smaller = Math.min(u, v);
                 SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(smaller, larger);
@@ -228,7 +229,13 @@ abstract class GraphObj extends Graph {
             if (k >= gn.successor.size() || k < 0) {
                 return 0;
             } else {
-                return gn.successor.get(k);
+                int count = 0;
+                for (Integer i : gn.successor) {
+                    if (count == k) {
+                        return i;
+                    }
+                    count += 1;
+                }
             }
         }
         return 0;
@@ -292,15 +299,15 @@ abstract class GraphObj extends Graph {
     /** A graph node class. */
     class GraphNode {
         int value;
-        ArrayList<Integer> predecessor = new ArrayList<Integer>();
-        ArrayList<Integer> successor = new ArrayList<Integer>();
+        ArrayDeque<Integer> predecessor = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> successor = new ArrayDeque<Integer>();
     }
     /** A PQ, head is the smallest available vertex number. */
     private PriorityQueue<Integer> _pqVertex;
     /** A PQ, head is the smallest available edge id number. */
     private PriorityQueue<Integer> _pqEdgeId;
     /** A hashMap that mapping from integer to corresponding vertex. */
-    HashMap<Integer, GraphNode> _nodeMap;
+    protected HashMap<Integer, GraphNode> _nodeMap;
     /** Max vertex. */
     private int _maxVertex;
     /** Edges list. */

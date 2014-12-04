@@ -17,33 +17,19 @@ public class UndirectedGraph extends GraphObj {
     @Override
     public int inDegree(int v) {
         // FIXME
-        if (this.contains(v)) {
-            return this._nodeMap.get(v).predecessor.size();
-        }
-        return 0;
+        return outDegree(v);
     }
 
     @Override
     public int predecessor(int v, int k) {
         // FIXME
-        if (contains(v)) {
-            GraphNode gn = _nodeMap.get(v);
-            if (k >= gn.predecessor.size() || k < 0) {
-                return 0;
-            } else {
-                return gn.predecessor.get(k);
-            }
-        }
-        return 0;
+        return successor(v, k);
     }
 
     @Override
     public Iteration<Integer> predecessors(int v) {
         // FIXME
-        if (contains(v)) {
-            return Iteration.iteration(this._nodeMap.get(v).predecessor.iterator());
-        }
-        return null;
+        return successors(v);
     }
 
     // FIXME

@@ -31,7 +31,13 @@ public class DirectedGraph extends GraphObj {
             if (k >= gn.predecessor.size() || k < 0) {
                 return 0;
             } else {
-                return gn.predecessor.get(k);
+                int count = 0;
+                for (Integer i : gn.predecessor) {
+                    if (count == k) {
+                        return i;
+                    }
+                    count += 1;
+                }
             }
         }
         return 0;
