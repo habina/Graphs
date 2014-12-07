@@ -16,7 +16,8 @@ public class UnitTest {
     /** Run all JUnit tests in the graph package. */
     public static void main(String[] ignored) {
         System.exit(textui.runClasses(graph.GraphTesting.class,
-                                      graph.TraversalTesting.class));
+                                      graph.TraversalTesting.class,
+                                      graph.PathsTesting.class));
     }
 
 }

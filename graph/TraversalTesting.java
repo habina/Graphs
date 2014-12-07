@@ -72,6 +72,7 @@ public class TraversalTesting{
         }
         
         public ArrayList<Integer> getRecord() {
+            java.util.Collections.reverse(_record);
             return _record;
         }
         
@@ -108,16 +109,16 @@ public class TraversalTesting{
         ArrayList<Integer> bfsVisited = bfsClient.getRecord();
         ArrayList<Integer> bfsExpected = new ArrayList<Integer>();
         bfsExpected.add(5);
-        bfsExpected.add(4);
         bfsExpected.add(3);
-        bfsExpected.add(1);
+        bfsExpected.add(4);
         bfsExpected.add(2);
+        bfsExpected.add(1);
         ArrayList<Integer> dfsPostVisited = dfsPostClient.getRecord();
         ArrayList<Integer> dfsPostExpected = new ArrayList<Integer>();
-        dfsPostExpected.add(1);
-        dfsPostExpected.add(4);
         dfsPostExpected.add(2);
         dfsPostExpected.add(3);
+        dfsPostExpected.add(1);
+        dfsPostExpected.add(4);
         dfsPostExpected.add(5);
         assertEquals(true, dfsVisited.equals(dfsExpected));
         assertEquals(true, bfsVisited.equals(bfsExpected));

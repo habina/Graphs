@@ -5,7 +5,7 @@ package graph;
 /** A partial implementation of ShortestPaths that contains the weights of
  *  the vertices and the predecessor edges.   The client needs to
  *  supply only the two-argument getWeight method.
- *  @author
+ *  @author Dasheng Chen
  */
 public abstract class SimpleShortestPaths extends ShortestPaths {
 
@@ -33,6 +33,7 @@ public abstract class SimpleShortestPaths extends ShortestPaths {
     @Override
     public int getPredecessor(int v) {
         // FIXME
+        _G.checkMyVertex(v);
         return 0;
     }
 
