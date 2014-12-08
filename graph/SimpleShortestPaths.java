@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.HashMap;
+
 /* See restrictions in Graph.java. */
 
 /** A partial implementation of ShortestPaths that contains the weights of
@@ -17,31 +19,37 @@ public abstract class SimpleShortestPaths extends ShortestPaths {
     /** A shortest path in G from SOURCE to DEST. */
     public SimpleShortestPaths(Graph G, int source, int dest) {
         super(G, source, dest);
+        _predecessor = new HashMap<Integer, Integer>();
+        _weight = new HashMap<Integer, Double>();
     }
 
     @Override
     public double getWeight(int v) {
         // FIXME
-        return 0.0;
+        return _weight.get(v);
     }
 
     @Override
     protected void setWeight(int v, double w) {
         // FIXME
+        // cost + heuristic value
+        _weight.put(v, w);
     }
 
     @Override
     public int getPredecessor(int v) {
-        // FIXME
-        _G.checkMyVertex(v);
-        return 0;
+        return _predecessor.get(v);
     }
 
     @Override
     protected void setPredecessor(int v, int u) {
         // FIXME
+        _predecessor.put(v, u);
     }
 
     // FIXME
-
+    /** Predecessor mapping. */
+    private HashMap<Integer, Integer> _predecessor;
+    /** Edge weight. */
+    private HashMap<Integer, Double> _weight;
 }

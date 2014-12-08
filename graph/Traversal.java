@@ -49,10 +49,12 @@ public abstract class Traversal {
             int v = _fringe.poll();
             if (!marked(v)) {
                 this.mark(v);
-                if (shouldPostVisit(0)) {
+                if (shouldPostVisit(v)) {
                     this.postVisit(v);
                 } else {
-                    this.visit(v);
+                    if (!this.visit(v)) {
+                        return;
+                    }
                 }
                 for(Integer i : this._G.successors(v)) {
                     if (!marked(i)) {
