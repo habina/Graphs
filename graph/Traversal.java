@@ -46,12 +46,16 @@ public abstract class Traversal {
         // FIXME
         _fringe.addAll(V0);
         while (!_fringe.isEmpty()) {
-            int v = _fringe.poll();
-            if (!marked(v)) {
-                this.mark(v);
+            int v = _fringe.peek();
+            if (marked(v)) {
+                _fringe.poll();
                 if (shouldPostVisit(v)) {
                     this.postVisit(v);
-                } else {
+                }
+            } else {
+                this.mark(v);
+                if (!shouldPostVisit(v)) {
+                    _fringe.poll();
                     if (!this.visit(v)) {
                         return;
                     }

@@ -57,6 +57,7 @@ public class TraversalTesting{
 
         protected DFSPostClient(Graph G) {
             super(G);
+            _G = G;
             _record = new ArrayList<Integer>();
         }
         
@@ -72,12 +73,13 @@ public class TraversalTesting{
         }
         
         public ArrayList<Integer> getRecord() {
-            java.util.Collections.reverse(_record);
             return _record;
         }
         
         /** Visited record. */
-        private ArrayList<Integer> _record;
+        ArrayList<Integer> _record;
+        /** The graph being traversed. */
+        private Graph _G;
     }
     
     @Test
@@ -115,10 +117,10 @@ public class TraversalTesting{
         bfsExpected.add(1);
         ArrayList<Integer> dfsPostVisited = dfsPostClient.getRecord();
         ArrayList<Integer> dfsPostExpected = new ArrayList<Integer>();
-        dfsPostExpected.add(2);
-        dfsPostExpected.add(3);
         dfsPostExpected.add(1);
         dfsPostExpected.add(4);
+        dfsPostExpected.add(2);
+        dfsPostExpected.add(3);
         dfsPostExpected.add(5);
         assertEquals(true, dfsVisited.equals(dfsExpected));
         assertEquals(true, bfsVisited.equals(bfsExpected));
