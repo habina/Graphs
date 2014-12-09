@@ -26,7 +26,11 @@ public abstract class SimpleShortestPaths extends ShortestPaths {
     @Override
     public double getWeight(int v) {
         // FIXME
-        return _weight.get(v);
+        if (_G.contains(v)) {
+            return _weight.get(v);
+        } else {
+            return Double.MAX_VALUE;
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@ class Rule {
     /** Add the target of DEPENDENT to my dependencies. */
     void addDependency(Rule dependent) {
         // FILL IN
+        _depends.add(getVertex(), dependent.getVertex());
     }
 
     /** Add COMMANDS to my command set.  Signals IllegalStateException if
@@ -30,6 +31,12 @@ class Rule {
      */
     void addCommands(List<String> commands) {
         // FILL IN
+        if (!commands.isEmpty() && !_commands.isEmpty()) {
+            throw new IllegalStateException();
+        }
+        for (String s : commands) {
+            _commands.add(s);
+        }
     }
 
     /** Return the vertex representing me. */
@@ -56,6 +63,12 @@ class Rule {
      *  a node. */
     private void checkFinishedDependencies() {
         // FILL IN
+        for (Integer i : _depends.successors(getVertex())) {
+            Rule r = _depends.getLabel(i);
+            if (r.isUnfinished()) {
+                error("not all dependencies are built");
+            }
+        }
     }
 
     /** Return true iff I am out of date and need to be rebuilt (including the
@@ -63,6 +76,19 @@ class Rule {
      *  successfully rebuilt. */
     private boolean outOfDate() {
         // FILL IN
+        if (getTime() == null) {
+            return true;
+        }
+        for (Integer i : _depends.successors(getVertex())) {
+            Rule r = _depends.getLabel(i);
+            // revise later.
+            if (r.getTime() == null) {
+                return true;
+            }
+            if (this.getTime() < r.getTime()) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -77,6 +103,9 @@ class Rule {
                       _target);
             }
             // FILL IN
+            for (String s : _commands) {
+                System.out.println(s);
+            }
         }
         _finished = true;
     }

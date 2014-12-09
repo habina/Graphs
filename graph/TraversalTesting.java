@@ -23,6 +23,11 @@ public class TraversalTesting{
             _record.add(v);
             return true;
         }
+        
+        @Override
+        protected boolean shouldPostVisit(int v) {
+            return false;
+        }
 
         public ArrayList<Integer> getRecord() {
             return _record;
@@ -64,11 +69,6 @@ public class TraversalTesting{
         @Override
         protected boolean postVisit(int v) {
             _record.add(v);
-            return true;
-        }
-        
-        @Override
-        protected boolean shouldPostVisit(int v) {
             return true;
         }
         

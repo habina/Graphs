@@ -34,8 +34,8 @@ public abstract class ShortestPaths {
               for (Integer w : _G.successors(v)) {
                   double n = getWeight(v, w);
                   double distW = getWeight(w);
-                  double estiW = estimatedDistance(w);
-                  double newDist = n + estiW;
+                  double distV = getWeight(v);
+                  double newDist = n + distV;
                   if (distW > newDist) {
                       setWeight(w, newDist);
                       setPredecessor(w, v);
@@ -97,12 +97,11 @@ public abstract class ShortestPaths {
         @Override
         public boolean offer(Integer e) {
             _vertexNumber.add(e);
-            return _pq.offer(new Vertex(e, getWeight(e)));
+            return _pq.offer(new Vertex(e, getWeight(e) + estimatedDistance(e)));
         }
 
         @Override
         public Integer poll() {
-            // TODO Auto-generated method stub
             Vertex v = _pq.poll();
             if (v == null) {
                 return null;
