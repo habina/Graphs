@@ -104,57 +104,26 @@ public class TraversalTesting {
         ArrayList<Integer> dfsVisited = dfsClient.getRecord();
         ArrayList<Integer> dfsExpected = new ArrayList<Integer>();
         dfsExpected.add(5);
-        dfsExpected.add(4);
-        dfsExpected.add(1);
         dfsExpected.add(3);
         dfsExpected.add(2);
+        dfsExpected.add(4);
+        dfsExpected.add(1);
         ArrayList<Integer> bfsVisited = bfsClient.getRecord();
         ArrayList<Integer> bfsExpected = new ArrayList<Integer>();
         bfsExpected.add(5);
-        bfsExpected.add(3);
         bfsExpected.add(4);
-        bfsExpected.add(2);
+        bfsExpected.add(3);
         bfsExpected.add(1);
+        bfsExpected.add(2);
         ArrayList<Integer> dfsPostVisited = dfsPostClient.getRecord();
         ArrayList<Integer> dfsPostExpected = new ArrayList<Integer>();
-        dfsPostExpected.add(1);
-        dfsPostExpected.add(4);
         dfsPostExpected.add(2);
         dfsPostExpected.add(3);
+        dfsPostExpected.add(1);
+        dfsPostExpected.add(4);
         dfsPostExpected.add(5);
         assertEquals(true, dfsVisited.equals(dfsExpected));
         assertEquals(true, bfsVisited.equals(bfsExpected));
         assertEquals(true, dfsPostVisited.equals(dfsPostExpected));
-    }
-
-    @Test
-    public void test1Directed() {
-        DirectedGraph g = new DirectedGraph();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add(1, 2);
-        g.add(1, 3);
-        g.add(1, 4);
-        g.add(2, 5);
-        g.add(2, 3);
-        g.add(2, 6);
-        g.add(3, 7);
-        g.add(3, 8);
-        g.add(8, 1);
-        g.add(8, 9);
-        g.add(8, 10);
-        g.add(10, 7);
-        assertEquals(12, g.edgeSize());
-        assertEquals(10, g.maxVertex());
-        DFSPostClient dfs = new DFSPostClient(g);
-        dfs.traverse(1);
     }
 }
