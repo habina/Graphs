@@ -114,8 +114,8 @@ class Trip {
             if (curName.equals(preName) && curDir.equals(preDir)) {
                 preDis += curDis;
             } else {
-                System.out.printf("%d. Take %s %s for %.1f miles.\n", seq,
-                    preName, preDir, preDis);
+                System.out.printf("%d. Take %s %s for %.1f miles.\n",
+                    seq, preName, preDir, preDis);
                 preName = curName;
                 preDir = curDir;
                 preDis = curDis;
@@ -123,8 +123,8 @@ class Trip {
             }
             lastName = _map.getLabel(curV).toString();
         }
-        System.out.printf("%d. Take %s %s for %.1f miles to %s.\n", seq, curName,
-            curDir, preDis, lastName);
+        System.out.printf("%d. Take %s %s for %.1f miles to %s.\n",
+            seq, curName, curDir, preDis, lastName);
         seq += 1;
         return seq;
     }

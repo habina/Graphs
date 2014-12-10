@@ -91,6 +91,9 @@ abstract class GraphObj extends Graph {
 
     @Override
     public int add(int u, int v) {
+        if (u == v) {
+            return u;
+        }
         if (contains(u) && contains(v)) {
             if (containsEdges(u, v)) {
                 return u;
@@ -194,7 +197,7 @@ abstract class GraphObj extends Graph {
                 }
             }
             _nodeMap.remove(v);
-            if (v == _maxVertex) {
+            if (v >= _maxVertex) {
                 TreeSet<Integer> ts = new TreeSet<Integer>(_nodeMap.keySet());
                 _maxVertex = ts.last();
             }

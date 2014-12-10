@@ -490,7 +490,7 @@ public class GraphTesting {
     }
 
     @Test
-    public void testUndirected() {
+    public void testUndirectedMaxVertex() {
         UndirectedGraph g = new UndirectedGraph();
         g.add();
         g.add();
@@ -522,5 +522,43 @@ public class GraphTesting {
         g.remove(10);
         assertEquals(6, g.edgeSize());
         assertEquals(9, g.maxVertex());
+    }
+
+    @Test
+    public void testUndirectedEdgeSize() {
+        UndirectedGraph g = new UndirectedGraph();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add();
+        g.add(1, 2);
+        g.add(1, 3);
+        g.add(1, 4);
+        g.add(2, 5);
+        g.add(2, 3);
+        g.add(2, 6);
+        g.add(3, 7);
+        g.add(3, 8);
+        g.add(8, 1);
+        g.add(8, 9);
+        g.add(8, 10);
+        g.add(10, 7);
+        assertEquals(12, g.edgeSize());
+        assertEquals(10, g.maxVertex());
+        g.remove(1, 2);
+        assertEquals(11, g.edgeSize());
+        assertEquals(10, g.maxVertex());
+        g.remove(2, 5);
+        assertEquals(10, g.edgeSize());
+        assertEquals(10, g.maxVertex());
+        g.remove(7, 10);
+        assertEquals(9, g.edgeSize());
+        assertEquals(10, g.maxVertex());
     }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Queue;
+import java.util.TreeSet;
 
 /** Implements a generalized traversal of a graph.  At any given time,
  *  there is a particular collection of untraversed vertices---the "fringe."
@@ -32,6 +33,7 @@ public abstract class Traversal {
         _G = G;
         _fringe = fringe;
         _visited = new ArrayList<Integer>();
+        _postVisited = new TreeSet<Integer>();
     }
 
     /** Unmark all vertices in the graph. */
@@ -46,7 +48,8 @@ public abstract class Traversal {
             int v = _fringe.peek();
             if (marked(v)) {
                 _fringe.poll();
-                if (shouldPostVisit(v)) {
+                if (shouldPostVisit(v) && !_postVisited.contains(v)) {
+                    _postVisited.add(v);
                     if (!this.postVisit(v)) {
                         return;
                     }
@@ -127,4 +130,6 @@ public abstract class Traversal {
     protected final Queue<Integer> _fringe;
     /** Vertex that visited. */
     private ArrayList<Integer> _visited;
+    /** Post visit set. */
+    private TreeSet<Integer> _postVisited;
 }
