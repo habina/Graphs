@@ -540,6 +540,7 @@ public class GraphTesting {
         g.add(1, 2);
         g.add(1, 3);
         g.add(1, 4);
+        g.add(1, 1);
         g.add(2, 5);
         g.add(2, 3);
         g.add(2, 6);
@@ -549,19 +550,22 @@ public class GraphTesting {
         g.add(8, 9);
         g.add(8, 10);
         g.add(10, 7);
-        assertEquals(12, g.edgeSize());
+        assertEquals(13, g.edgeSize());
         assertEquals(10, g.maxVertex());
-        g.remove(1, 2);
-        assertEquals(11, g.edgeSize());
+        g.remove(1);
+        assertEquals(8, g.edgeSize());
+        assertEquals(10, g.maxVertex());
+        g.remove(2);
+        assertEquals(5, g.edgeSize());
         assertEquals(10, g.maxVertex());
         g.remove(2, 5);
-        assertEquals(10, g.edgeSize());
+        assertEquals(5, g.edgeSize());
         assertEquals(10, g.maxVertex());
         g.remove(7, 10);
-        assertEquals(9, g.edgeSize());
+        assertEquals(4, g.edgeSize());
         assertEquals(10, g.maxVertex());
         g.remove(8);
-        assertEquals(5, g.edgeSize());
+        assertEquals(1, g.edgeSize());
         assertEquals(10, g.maxVertex());
     }
 

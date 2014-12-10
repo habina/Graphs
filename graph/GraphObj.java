@@ -91,11 +91,8 @@ abstract class GraphObj extends Graph {
 
     @Override
     public int add(int u, int v) {
-        if (u == v) {
-            return u;
-        }
         if (contains(u) && contains(v)) {
-            if (containsEdges(u, v)) {
+            if (contains(u, v)) {
                 return u;
             }
             int avalId = _pqEdgeId.poll();
@@ -123,24 +120,6 @@ abstract class GraphObj extends Graph {
         return u;
     }
 
-    /** check if contains this edges.
-     * @param u vertex number
-     * @param v vertex number
-     * @return true if exist
-     */
-    private boolean containsEdges(int u, int v) {
-        if (isDirected()) {
-            return _edgesID
-                .containsKey(new SimpleImmutableEntry<Integer, Integer>(u, v));
-        } else {
-            int larger = Math.max(u, v);
-            int smaller = Math.min(u, v);
-            return _edgesID
-                .containsKey(new SimpleImmutableEntry<Integer, Integer>(
-                    smaller, larger));
-        }
-    }
-
     /** find edge index number.
      * @param u vertex nummber
      * @param v vertex number
@@ -148,22 +127,30 @@ abstract class GraphObj extends Graph {
      */
     private int indexEdges(int u, int v) {
         int count = -1;
+        boolean found = false;
         for (int[] tuple : _edgesList) {
             count += 1;
             if (tuple[0] == u && tuple[1] == v) {
+                found = true;
                 break;
             }
         }
-        if (!isDirected()) {
+        if (!isDirected() && !found) {
             count = -1;
+            found = false;
             for (int[] tuple : _edgesList) {
                 count += 1;
                 if (tuple[0] == v && tuple[1] == u) {
+                    found = true;
                     break;
                 }
             }
         }
-        return count;
+        if (found) {
+            return count;
+        } else {
+            return -1;
+        }
     }
 
     @Override
@@ -180,7 +167,10 @@ abstract class GraphObj extends Graph {
                     _edgesID.remove(key);
                 }
                 suc.remove(v);
-                _edgesList.remove(indexEdges(preVertex, v));
+                int edIndex = indexEdges(preVertex, v);
+                if (edIndex != -1) {
+                    _edgesList.remove(edIndex);
+                }
             }
             for (Integer sucVertex : gn.successor) {
                 ArrayDeque<Integer> prd = _nodeMap.get(sucVertex).predecessor;
@@ -193,7 +183,10 @@ abstract class GraphObj extends Graph {
                 }
                 prd.remove(v);
                 if (isDirected()) {
-                    _edgesList.remove(indexEdges(v, sucVertex));
+                    int edIndex = indexEdges(v, sucVertex);
+                    if (edIndex != -1) {
+                        _edgesList.remove(edIndex);
+                    }
                 }
             }
             _nodeMap.remove(v);
@@ -209,11 +202,14 @@ abstract class GraphObj extends Graph {
     public void remove(int u, int v) {
         GraphNode uNode = _nodeMap.get(u);
         GraphNode vNode = _nodeMap.get(v);
-        if (uNode != null && vNode != null && containsEdges(u, v)) {
+        if (uNode != null && vNode != null && contains(u, v)) {
             uNode.successor.remove(v);
             vNode.predecessor.remove(u);
             if (isDirected()) {
-                _edgesList.remove(indexEdges(u, v));
+                int edIndex = indexEdges(u, v);
+                if (edIndex != -1) {
+                    _edgesList.remove(edIndex);
+                }
             } else {
                 uNode.predecessor.remove(v);
                 vNode.successor.remove(u);
@@ -224,7 +220,10 @@ abstract class GraphObj extends Graph {
                 int oldId = _edgesID.get(key);
                 _edgesID.remove(key);
                 _pqEdgeId.add(oldId);
-                _edgesList.remove(indexEdges(smaller, larger));
+                int edIndex = indexEdges(smaller, larger);
+                if (edIndex != -1) {
+                    _edgesList.remove(edIndex);
+                }
             }
         }
     }
