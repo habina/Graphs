@@ -47,15 +47,17 @@ public abstract class Traversal {
             if (marked(v)) {
                 _fringe.poll();
                 if (shouldPostVisit(v)) {
-                    this.postVisit(v);
+                    if (!this.postVisit(v)) {
+                        return;
+                    }
                 }
             } else {
                 this.mark(v);
                 if (!shouldPostVisit(v)) {
                     _fringe.poll();
-                    if (!this.visit(v)) {
-                        return;
-                    }
+                }
+                if (!this.visit(v)) {
+                    return;
                 }
                 ArrayDeque<Integer> suc = new ArrayDeque<Integer>();
                 Iteration<Integer> iterSuc = this._G.successors(v);

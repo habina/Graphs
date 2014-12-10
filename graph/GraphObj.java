@@ -5,6 +5,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 /** A partial implementation of Graph containing elements common to
  *  directed and undirected graphs.
@@ -193,6 +194,10 @@ abstract class GraphObj extends Graph {
                 }
             }
             _nodeMap.remove(v);
+            if (v == _maxVertex) {
+                TreeSet<Integer> ts = new TreeSet<Integer>(_nodeMap.keySet());
+                _maxVertex = ts.last();
+            }
             _pqVertex.add(v);
         }
     }

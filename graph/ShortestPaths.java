@@ -177,7 +177,7 @@ public abstract class ShortestPaths {
         _aStarTraversal = new AStarTraversal(_G, new AStarQueue());
         for (Integer i : _G.vertices()) {
             setWeight(i, Double.MAX_VALUE);
-            setPredecessor(i, -1);
+            setPredecessor(i, 0);
         }
         setWeight(getSource(), 0);
         _aStarTraversal.traverse(getSource());

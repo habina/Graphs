@@ -7,7 +7,6 @@ import graph.SimpleShortestPaths;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -101,7 +100,6 @@ class Trip {
         String preName = preR.toString();
         String preDir = preR.direction().fullName();
         double preDis = preR.length();
-        DecimalFormat df = new DecimalFormat("0.0");
         String curName = "";
         String curDir = "";
         String lastName = "";
@@ -116,8 +114,8 @@ class Trip {
             if (curName.equals(preName) && curDir.equals(preDir)) {
                 preDis += curDis;
             } else {
-                System.out.printf("%d. Take %s %s for %s miles.\n", seq,
-                    preName, preDir, df.format(preDis));
+                System.out.printf("%d. Take %s %s for %.1f miles.\n", seq,
+                    preName, preDir, preDis);
                 preName = curName;
                 preDir = curDir;
                 preDis = curDis;
@@ -125,8 +123,8 @@ class Trip {
             }
             lastName = _map.getLabel(curV).toString();
         }
-        System.out.printf("%d. Take %s %s for %s miles to %s.\n", seq, curName,
-            curDir, df.format(preDis), lastName);
+        System.out.printf("%d. Take %s %s for %.1f miles to %s.\n", seq, curName,
+            curDir, preDis, lastName);
         seq += 1;
         return seq;
     }

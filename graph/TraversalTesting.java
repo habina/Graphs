@@ -126,7 +126,7 @@ public class TraversalTesting {
         assertEquals(true, bfsVisited.equals(bfsExpected));
         assertEquals(true, dfsPostVisited.equals(dfsPostExpected));
     }
-    
+
     @Test
     public void test1Directed() {
         DirectedGraph g = new DirectedGraph();
@@ -152,12 +152,9 @@ public class TraversalTesting {
         g.add(8, 9);
         g.add(8, 10);
         g.add(10, 7);
+        assertEquals(12, g.edgeSize());
+        assertEquals(10, g.maxVertex());
         DFSPostClient dfs = new DFSPostClient(g);
         dfs.traverse(1);
-//        System.out.println("haha");
-        for (Integer i : dfs.getRecord()) {
-            System.out.println(i);
-        }
     }
-
 }
