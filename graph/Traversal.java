@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,7 +57,15 @@ public abstract class Traversal {
                         return;
                     }
                 }
-                for (Integer i : this._G.successors(v)) {
+                ArrayDeque<Integer> suc = new ArrayDeque<Integer>();
+                Iteration<Integer> iterSuc = this._G.successors(v);
+                if (reverseSuccessors(v)) {
+                    for (Integer i : iterSuc) {
+                        suc.addFirst(i);
+                    }
+                    iterSuc = Iteration.iteration(suc.iterator());
+                }
+                for (Integer i : iterSuc) {
                     if (processSuccessor(v, i)) {
                         _fringe.add(i);
                     }

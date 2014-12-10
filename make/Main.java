@@ -44,7 +44,8 @@ public final class Main {
     /** Throw an exception containing a message constructed from FORMAT
      *  and ARGS, as for String.format. */
     static void error(String format, Object... args) {
-        throw new IllegalArgumentException("Error - " + String.format(format, args));
+        throw new IllegalArgumentException("Error - "
+            + String.format(format, args));
     }
 
     /** Print a brief usage message and exit program abnormally. */

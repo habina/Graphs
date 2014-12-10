@@ -127,6 +127,7 @@ class Trip {
         }
         System.out.printf("%d. Take %s %s for %s miles to %s.\n", seq, curName,
             curDir, df.format(preDis), lastName);
+        seq += 1;
         return seq;
     }
 

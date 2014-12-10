@@ -63,7 +63,6 @@ class Maker {
         String target;
         HashSet<String> dependencies;
         ArrayList<String> commands;
-
         target = null;
         dependencies = null;
         commands = null;

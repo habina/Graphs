@@ -488,31 +488,4 @@ public class GraphTesting {
         assertEquals(0, uG.vertexSize());
         assertEquals(0, uG.edgeSize());
     }
-
-    @Test
-    public void test1Directed() {
-        DirectedGraph g = new DirectedGraph();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add();
-        g.add(1, 2);
-        g.add(1, 3);
-        g.add(1, 4);
-        g.add(2, 5);
-        g.add(2, 3);
-        g.add(2, 6);
-        g.add(3, 7);
-        g.add(3, 8);
-        g.add(8, 1);
-        g.add(8, 9);
-        g.add(8, 10);
-        g.add(10, 7);
-    }
 }

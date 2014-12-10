@@ -1,7 +1,5 @@
 package graph;
 
-/* See restrictions in Graph.java. */
-
 import java.util.Iterator;
 
 /** An Iteration<TYPE> is an Iterator<TYPE> that may also be used in a foreach
