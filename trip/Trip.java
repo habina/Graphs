@@ -60,10 +60,8 @@ class Trip {
         if (dests.length < 2) {
             error("must have at least two locations for a trip");
         }
-
         System.out.printf("From %s:%n%n", dests[0]);
         int step;
-
         step = 1;
         for (int i = 1; i < dests.length; i += 1) {
             Integer
@@ -103,7 +101,7 @@ class Trip {
         String preName = preR.toString();
         String preDir = preR.direction().fullName();
         double preDis = preR.length();
-        DecimalFormat df = new DecimalFormat(".0");
+        DecimalFormat df = new DecimalFormat("#.0");
         String curName = "";
         String curDir = "";
         String lastName = "";
