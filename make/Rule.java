@@ -22,7 +22,6 @@ class Rule {
 
     /** Add the target of DEPENDENT to my dependencies. */
     void addDependency(Rule dependent) {
-        // FILL IN
         _depends.add(getVertex(), dependent.getVertex());
     }
 
@@ -30,7 +29,6 @@ class Rule {
      *  COMMANDS is non-empty, but I already have a non-empty command set.
      */
     void addCommands(List<String> commands) {
-        // FILL IN
         if (!commands.isEmpty() && !_commands.isEmpty()) {
             throw new IllegalStateException();
         }
@@ -62,7 +60,6 @@ class Rule {
     /** Check that dependencies are in fact built before it's time to rebuild
      *  a node. */
     private void checkFinishedDependencies() {
-        // FILL IN
         for (Integer i : _depends.successors(getVertex())) {
             Rule r = _depends.getLabel(i);
             if (r.isUnfinished()) {
@@ -75,13 +72,11 @@ class Rule {
      *  case where I do not exist).  Assumes that my dependencies are all
      *  successfully rebuilt. */
     private boolean outOfDate() {
-        // FILL IN
         if (getTime() == null) {
             return true;
         }
         for (Integer i : _depends.successors(getVertex())) {
             Rule r = _depends.getLabel(i);
-            // revise later.
             if (r.getTime() == null) {
                 return true;
             }
@@ -96,13 +91,12 @@ class Rule {
      *  (error otherwise). */
     void rebuild() {
         checkFinishedDependencies();
-
         if (outOfDate()) {
             if (_commands.isEmpty()) {
                 error("%s needs to be rebuilt, but has no commands",
                       _target);
             }
-            // FILL IN
+            this._time = _maker.getCurrentTime();
             for (String s : _commands) {
                 System.out.println(s);
             }

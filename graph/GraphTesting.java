@@ -33,7 +33,7 @@ public class GraphTesting {
         DirectedGraph dGraph = new DirectedGraph();
         dGraph.checkMyVertex(1);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void testChecktMyVertex2() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -41,13 +41,13 @@ public class GraphTesting {
         dGraph.checkMyVertex(1);
         dGraph.checkMyVertex(2);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void testChecktMyVertex3() {
         UndirectedGraph uDGraph = new UndirectedGraph();
         uDGraph.checkMyVertex(1);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void testChecktMyVertex4() {
         UndirectedGraph uDGraph = new UndirectedGraph();
@@ -91,7 +91,7 @@ public class GraphTesting {
         assertEquals(true, uG.contains(3, 2));
         assertEquals(false, uG.contains(1, 3));
     }
-    
+
     @Test
     public void testVertexSize() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -107,7 +107,7 @@ public class GraphTesting {
         assertEquals(3, uDGraph.add());
         assertEquals(3, uDGraph.vertexSize());
     }
-    
+
     @Test
     public void testMaxVertex() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -127,7 +127,7 @@ public class GraphTesting {
         assertEquals(4, uDGraph.add());
         assertEquals(4, uDGraph.maxVertex());
     }
-    
+
     @Test
     public void testEdgeSize() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -147,7 +147,7 @@ public class GraphTesting {
         assertEquals(2, uDGraph.add(2, 3));
         assertEquals(2, uDGraph.edgeSize());
     }
-    
+
     @Test
     public void testIsDirected() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -155,7 +155,7 @@ public class GraphTesting {
         UndirectedGraph uDGraph = new UndirectedGraph();
         assertEquals(false, uDGraph.isDirected());
     }
-    
+
     @Test
     public void testOutDegree() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -171,7 +171,7 @@ public class GraphTesting {
         dGraph.add(3, 1);
         assertEquals(1, dGraph.outDegree(3));
     }
-    
+
     @Test
     public void testInDegree() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -189,7 +189,7 @@ public class GraphTesting {
         dGraph.add(2, 1);
         assertEquals(2, dGraph.inDegree(1));
     }
-    
+
     @Test
     public void testDegree() {
         UndirectedGraph uDGraph = new UndirectedGraph();
@@ -205,7 +205,7 @@ public class GraphTesting {
         uDGraph.add(3, 1);
         assertEquals(1, uDGraph.degree(3));
     }
-    
+
     @Test
     public void testRemove() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -243,7 +243,7 @@ public class GraphTesting {
         uDGraph.remove(1, 2);
         assertEquals(false, uDGraph.contains(1, 2));
     }
-    
+
     @Test
     public void testVertices() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -252,7 +252,7 @@ public class GraphTesting {
         dGraph.add();
         Iteration<Integer> iter = dGraph.vertices();
         int count = 1;
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             assertEquals(count, iter.next().intValue());
             count += 1;
         }
@@ -262,12 +262,12 @@ public class GraphTesting {
         uDGraph.add();
         iter = uDGraph.vertices();
         count = 1;
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             assertEquals(count, iter.next().intValue());
             count += 1;
         }
     }
-    
+
     @Test
     public void testSuccessor() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -287,7 +287,7 @@ public class GraphTesting {
         dGraph.remove(2, 3);
         assertEquals(0, dGraph.successor(2, 0));
     }
-    
+
     @Test
     public void testPredecessor() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -303,7 +303,7 @@ public class GraphTesting {
         dGraph.add(1, 2);
         assertEquals(1, dGraph.predecessor(2, 0));
     }
-    
+
     @Test
     public void testNeighbor() {
         UndirectedGraph uDGraph = new UndirectedGraph();
@@ -325,7 +325,7 @@ public class GraphTesting {
         assertEquals(0, uDGraph.neighbor(2, 0));
         assertEquals(0, uDGraph.neighbor(2, 1));
     }
-    
+
     @Test
     public void testSuccessors() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -347,7 +347,7 @@ public class GraphTesting {
         assertEquals(4, iter.next().intValue());
         assertEquals(false, iter.hasNext());
     }
-    
+
     @Test
     public void testPredecessors() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -372,7 +372,7 @@ public class GraphTesting {
         assertEquals(2, iter.next().intValue());
         assertEquals(false, iter.hasNext());
     }
-    
+
     @Test
     public void testNeighbors() {
         UndirectedGraph uDGraph = new UndirectedGraph();
@@ -395,7 +395,7 @@ public class GraphTesting {
         assertEquals(1, iter.next().intValue());
         assertEquals(false, iter.hasNext());
     }
-    
+
     @Test
     public void testEdges() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -444,12 +444,12 @@ public class GraphTesting {
         assertEquals(3, tmp[1]);
         assertEquals(false, iter.hasNext());
     }
-    
+
     @Test
     public void testMine() {
         testContains();
     }
-    
+
     @Test
     public void testEdgeId() {
         DirectedGraph dGraph = new DirectedGraph();
@@ -484,10 +484,8 @@ public class GraphTesting {
         DirectedGraph g = new DirectedGraph();
         assertEquals("Initial graph has vertices", 0, g.vertexSize());
         assertEquals("Initial graph has edges", 0, g.edgeSize());
-        
-        UndirectedGraph uG= new UndirectedGraph();
+        UndirectedGraph uG = new UndirectedGraph();
         assertEquals(0, uG.vertexSize());
         assertEquals(0, uG.edgeSize());
     }
-
 }

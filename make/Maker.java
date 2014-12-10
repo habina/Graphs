@@ -4,14 +4,11 @@ import graph.DepthFirstTraversal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,10 +42,9 @@ class Maker {
         name = "<unknown>";
         try {
             File f = new File(fileInfoName);
-            Scanner inp = new Scanner(f); // FIXME
+            Scanner inp = new Scanner(f);
             _currentTime = inp.nextInt();
             while (inp.hasNext()) {
-                // FILL IN
                 _ages.put(inp.next(), inp.nextInt());
             }
             inp.close();
@@ -58,7 +54,6 @@ class Maker {
             error("Could not find makefile: %s", fileInfoName);
             return;
         }
-        // FIXME?
     }
 
     /** Read make rules from the file named MAKEFILENAME and form the dependence
@@ -74,12 +69,11 @@ class Maker {
         commands = null;
         try {
             File f = new File(makefileName);
-            inp = new Scanner(f);  // FIXME
+            inp = new Scanner(f);
         } catch (NoSuchElementException excp) {
             error("Near such entry found");
             return;
         } catch (FileNotFoundException excp) {
-            // FILL IN
             error("Could not find makefile: %s", makefileName);
             return;
         }
@@ -197,7 +191,6 @@ class Maker {
 
         @Override
         protected boolean postVisit(int v0) {
-            // FILL IN
             _depends.getLabel(v0).rebuild();
             return true;
         }

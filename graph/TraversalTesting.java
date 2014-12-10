@@ -9,7 +9,7 @@ import org.junit.Test;
 /** Unit tests for the Traversal class.
  *  @author Dasheng Chen
  */
-public class TraversalTesting{
+public class TraversalTesting {
 
     private class DFSClient extends DepthFirstTraversal {
         /** A constructor. */
@@ -23,7 +23,7 @@ public class TraversalTesting{
             _record.add(v);
             return true;
         }
-        
+
         @Override
         protected boolean shouldPostVisit(int v) {
             return false;
@@ -32,11 +32,11 @@ public class TraversalTesting{
         public ArrayList<Integer> getRecord() {
             return _record;
         }
-        
+
         /** Visited record. */
         private ArrayList<Integer> _record;
     }
-    
+
     private class BFSClient extends BreadthFirstTraversal {
         /** A constructor. */
         protected BFSClient(Graph G) {
@@ -53,7 +53,7 @@ public class TraversalTesting{
         public ArrayList<Integer> getRecord() {
             return _record;
         }
-        
+
         /** Visited record. */
         private ArrayList<Integer> _record;
     }
@@ -65,25 +65,25 @@ public class TraversalTesting{
             _G = G;
             _record = new ArrayList<Integer>();
         }
-        
+
         @Override
         protected boolean postVisit(int v) {
             _record.add(v);
             return true;
         }
-        
+
         public ArrayList<Integer> getRecord() {
             return _record;
         }
-        
+
         /** Visited record. */
         ArrayList<Integer> _record;
         /** The graph being traversed. */
         private Graph _G;
     }
-    
+
     @Test
-    public void TestClientTraversal() {
+    public void testClientTraversal() {
         DirectedGraph g = new DirectedGraph();
         g.add();
         g.add();

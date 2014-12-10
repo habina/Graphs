@@ -16,7 +16,8 @@ public class PathsTesting {
     class VideoGraphPaths extends SimpleShortestPaths {
         public VideoGraphPaths(Graph g, int source, int dest) {
             super(g, source, dest);
-            _eCost = new HashMap<SimpleImmutableEntry<Integer,Integer>, Double>();
+            _eCost = new
+                HashMap<SimpleImmutableEntry<Integer, Integer>, Double>();
             _eDis = new HashMap<Integer, Double>();
             setCost(new SimpleImmutableEntry<Integer, Integer>(4, 2), 12.2);
             setCost(new SimpleImmutableEntry<Integer, Integer>(4, 3), 102.0);
@@ -33,11 +34,12 @@ public class PathsTesting {
             setDistance(1, 300.0);
             setDistance(7, 400.0);
         }
-        
-        private void setCost(SimpleImmutableEntry<Integer, Integer> sie, double cost) {
+
+        private void setCost(SimpleImmutableEntry<Integer, Integer> sie,
+            double cost) {
             _eCost.put(sie, cost);
         }
-        
+
         private void setDistance(int v, double d) {
             _eDis.put(v, d);
         }
@@ -47,13 +49,14 @@ public class PathsTesting {
             if (u == 7 && v == 1) {
                 throw new IllegalArgumentException();
             }
-            SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(u, v);
+            SimpleImmutableEntry<Integer, Integer> key =
+                new SimpleImmutableEntry<Integer, Integer>(u, v);
             if (_eCost.containsKey(key)) {
                 return _eCost.get(key);
             }
             return Double.MAX_VALUE;
         }
-        
+
         @Override
         protected double estimatedDistance(int v) {
             if (v == 1) {
@@ -64,13 +67,13 @@ public class PathsTesting {
             }
             return 0;
         }
-        
+
         /** Edge cost. */
         private HashMap<SimpleImmutableEntry<Integer, Integer>, Double> _eCost;
         /** Estimated distance. */
         private HashMap<Integer, Double> _eDis;
     }
-    
+
     @Test
     public void testWeights() {
         Graph g = new DirectedGraph();

@@ -1,7 +1,5 @@
 package graph;
 
-/* See restrictions in Graph.java. */
-
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,55 +17,75 @@ import java.util.Queue;
  *  @author Dasheng Chen
  */
 public abstract class ShortestPaths {
-    
+
+    /** A start traversal. */
     class AStarTraversal extends Traversal {
 
+        /** Contructor.
+         *  @param G g
+         *  @param fringe fringe
+         * */
         protected AStarTraversal(Graph G, Queue<Integer> fringe) {
             super(G, fringe);
         }
-        
+
         @Override
         protected boolean visit(int v) {
             if (v == ShortestPaths.this.getDest()) {
                 return false;
             } else {
-              for (Integer w : _G.successors(v)) {
-                  double n = getWeight(v, w);
-                  double distW = getWeight(w);
-                  double distV = getWeight(v);
-                  double newDist = n + distV;
-                  if (distW > newDist) {
-                      setWeight(w, newDist);
-                      setPredecessor(w, v);
-                  }
-              }
-              return true;
+                for (Integer w : _G.successors(v)) {
+                    double n = getWeight(v, w);
+                    double distW = getWeight(w);
+                    double distV = getWeight(v);
+                    double newDist = n + distV;
+                    if (distW > newDist) {
+                        setWeight(w, newDist);
+                        setPredecessor(w, v);
+                    }
+                }
+                return true;
             }
         }
     }
-    
+
+    /** A PQ implmented for A Star. */
     class AStarQueue extends AbstractQueue<Integer> {
-        
-        class Vertex{
+
+        /** Vertex. */
+        class Vertex {
+
+            /** Constructor.
+             *  @param vertex vertex
+             *  @param value weight and estimation
+             * */
             public Vertex(int vertex, double value) {
                 _vertex = vertex;
                 _value = value;
             }
-            
-            public int get_vertex() {
+
+            /** Return vertex. */
+            public int getVertex() {
                 return _vertex;
             }
 
-            public void set_vertex(int _vertex) {
-                this._vertex = _vertex;
+            /** Setter for vertex.
+             *  @param vertex vertex
+             * */
+            public void setVertex(int vertex) {
+                this._vertex = vertex;
             }
 
-            public double get_value() {
+            /** Return value. */
+            public double getValue() {
                 return _value;
             }
 
-            public void set_value(double _value) {
-                this._value = _value;
+            /** Setter for value.
+             *  @param value value
+             * */
+            public void setValue(double value) {
+                this._value = value;
             }
 
             /** vertex number. */
@@ -75,29 +93,32 @@ public abstract class ShortestPaths {
             /** weight plus estimated distance. */
             private double _value;
         }
-        
-        class VertexComparator implements Comparator<Vertex>{
+
+        /** A comparator for vertex. */
+        class VertexComparator implements Comparator<Vertex> {
             @Override
             public int compare(Vertex o1, Vertex o2) {
-                if (o1.get_value() == o2.get_value()) {
+                if (o1.getValue() == o2.getValue()) {
                     return 0;
-                } else if (o1.get_value() < o2.get_value()) {
+                } else if (o1.getValue() < o2.getValue()) {
                     return -1;
                 } else {
                     return 1;
                 }
             }
         }
-        
+
+        /** Constructor. */
         public AStarQueue() {
             _pq = new PriorityQueue<Vertex>(1, new VertexComparator());
             _vertexNumber = new ArrayList<Integer>();
         }
-        
+
         @Override
         public boolean offer(Integer e) {
             _vertexNumber.add(e);
-            return _pq.offer(new Vertex(e, getWeight(e) + estimatedDistance(e)));
+            return _pq
+                .offer(new Vertex(e, getWeight(e) + estimatedDistance(e)));
         }
 
         @Override
@@ -106,8 +127,8 @@ public abstract class ShortestPaths {
             if (v == null) {
                 return null;
             } else {
-                _vertexNumber.remove(new Integer(v.get_vertex()));
-                return v.get_vertex();
+                _vertexNumber.remove(new Integer(v.getVertex()));
+                return v.getVertex();
             }
         }
 
@@ -117,7 +138,7 @@ public abstract class ShortestPaths {
             if (v == null) {
                 return null;
             } else {
-                return v.get_vertex();
+                return v.getVertex();
             }
         }
 
@@ -130,7 +151,7 @@ public abstract class ShortestPaths {
         public int size() {
             return _pq.size();
         }
-        
+
         /** A PQ for store vertex.*/
         private PriorityQueue<Vertex> _pq;
         /** ArrayList of vertex number. */
@@ -147,32 +168,28 @@ public abstract class ShortestPaths {
         _G = G;
         _source = source;
         _dest = dest;
-        // FIXME
     }
 
     /** Initialize the shortest paths.  Must be called before using
      *  getWeight, getPredecessor, and pathTo. */
     public void setPaths() {
-        // FIXME
         _path = new LinkedList<Integer>();
-        _AStarTraversal = new AStarTraversal(_G, new AStarQueue());
+        _aStarTraversal = new AStarTraversal(_G, new AStarQueue());
         for (Integer i : _G.vertices()) {
             setWeight(i, Double.MAX_VALUE);
             setPredecessor(i, -1);
         }
         setWeight(getSource(), 0);
-        _AStarTraversal.traverse(getSource());
+        _aStarTraversal.traverse(getSource());
     }
 
     /** Returns the starting vertex. */
     public int getSource() {
-        // FIXME
         return _source;
     }
 
     /** Returns the target vertex, or 0 if there is none. */
     public int getDest() {
-        // FIXME
         return _dest;
     }
 
@@ -205,7 +222,6 @@ public abstract class ShortestPaths {
      *  at V that represents a shortest path to V.  Invalid if there is a
      *  destination vertex other than V. */
     public List<Integer> pathTo(int v) {
-        // FIXME
         while (v != getSource()) {
             _path.addFirst(v);
             v = getPredecessor(v);
@@ -220,17 +236,14 @@ public abstract class ShortestPaths {
         return pathTo(getDest());
     }
 
-    // FIXME
-
     /** The graph being searched. */
     protected final Graph _G;
     /** The starting vertex. */
     private final int _source;
     /** The target vertex. */
     private final int _dest;
-    // FIXME
     /** A Star traversal. */
-    private AStarTraversal _AStarTraversal;
+    private AStarTraversal _aStarTraversal;
     /** A path. */
     private LinkedList<Integer> _path;
 }

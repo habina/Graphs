@@ -1,7 +1,5 @@
 package graph;
 
-/* See restrictions in Graph.java. */
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,13 +35,11 @@ public abstract class Traversal {
 
     /** Unmark all vertices in the graph. */
     public void clear() {
-        // FIXME
         _visited.clear();
     }
 
     /** Initialize the fringe to V0 and perform a traversal. */
     public void traverse(Collection<Integer> V0) {
-        // FIXME
         _fringe.addAll(V0);
         while (!_fringe.isEmpty()) {
             int v = _fringe.peek();
@@ -60,8 +56,8 @@ public abstract class Traversal {
                         return;
                     }
                 }
-                for(Integer i : this._G.successors(v)) {
-                    if (!marked(i)) {
+                for (Integer i : this._G.successors(v)) {
+                    if (processSuccessor(v, i)) {
                         _fringe.add(i);
                     }
                 }
@@ -76,13 +72,11 @@ public abstract class Traversal {
 
     /** Returns true iff V has been marked. */
     protected boolean marked(int v) {
-        // FIXME
         return _visited.contains(v);
     }
 
     /** Mark vertex V. */
     protected void mark(int v) {
-        // FIXME
         _visited.add(v);
     }
 
@@ -122,7 +116,4 @@ public abstract class Traversal {
     protected final Queue<Integer> _fringe;
     /** Vertex that visited. */
     private ArrayList<Integer> _visited;
-    
-    // FIXME
-
 }

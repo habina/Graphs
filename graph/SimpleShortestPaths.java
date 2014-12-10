@@ -2,8 +2,6 @@ package graph;
 
 import java.util.HashMap;
 
-/* See restrictions in Graph.java. */
-
 /** A partial implementation of ShortestPaths that contains the weights of
  *  the vertices and the predecessor edges.   The client needs to
  *  supply only the two-argument getWeight method.
@@ -25,7 +23,6 @@ public abstract class SimpleShortestPaths extends ShortestPaths {
 
     @Override
     public double getWeight(int v) {
-        // FIXME
         if (_G.contains(v)) {
             return _weight.get(v);
         } else {
@@ -35,25 +32,25 @@ public abstract class SimpleShortestPaths extends ShortestPaths {
 
     @Override
     protected void setWeight(int v, double w) {
-        // FIXME
-        // cost + heuristic value
         _weight.put(v, w);
     }
 
     @Override
     public int getPredecessor(int v) {
-        return _predecessor.get(v);
+        if (_predecessor.containsKey(v)) {
+            return _predecessor.get(v);
+        } else {
+            return 0;
+        }
     }
 
     @Override
     protected void setPredecessor(int v, int u) {
-        // FIXME
         _predecessor.put(v, u);
     }
 
-    // FIXME
     /** Predecessor mapping. */
-    private HashMap<Integer, Integer> _predecessor;
+    protected HashMap<Integer, Integer> _predecessor;
     /** Edge weight. */
-    private HashMap<Integer, Double> _weight;
+    protected HashMap<Integer, Double> _weight;
 }

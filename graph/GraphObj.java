@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
-/* See restrictions in Graph.java. */
-
 /** A partial implementation of Graph containing elements common to
  *  directed and undirected graphs.
  *
@@ -17,31 +15,28 @@ abstract class GraphObj extends Graph {
 
     /** A new, empty Graph. */
     GraphObj() {
-        // FIXME
         _pqVertex = new PriorityQueue<Integer>();
         _pqEdgeId = new PriorityQueue<Integer>();
         _pqVertex.add(1);
         _pqEdgeId.add(1);
         _nodeMap = new HashMap<Integer, GraphNode>();
         _edgesList = new ArrayList<int[]>();
-        _edgesID = new HashMap<SimpleImmutableEntry<Integer, Integer>, Integer>();
+        _edgesID = new
+            HashMap<SimpleImmutableEntry<Integer, Integer>, Integer>();
     }
 
     @Override
     public int vertexSize() {
-        // FIXME
         return _nodeMap.size();
     }
 
     @Override
     public int maxVertex() {
-        // FIXME
         return _maxVertex;
     }
 
     @Override
     public int edgeSize() {
-        // FIXME
         return _edgesList.size();
     }
 
@@ -50,7 +45,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     public int outDegree(int v) {
-        // FIXME
         GraphNode gn = _nodeMap.get(v);
         if (gn == null) {
             return 0;
@@ -63,13 +57,11 @@ abstract class GraphObj extends Graph {
 
     @Override
     public boolean contains(int u) {
-        // FIXME
         return _nodeMap.containsKey(u);
     }
 
     @Override
     public boolean contains(int u, int v) {
-        // FIXME
         if (_nodeMap.containsKey(u) && _nodeMap.containsKey(v)) {
             GraphNode gn = _nodeMap.get(u);
             if (isDirected()) {
@@ -83,7 +75,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     public int add() {
-        // FIXME
         int vertex = _pqVertex.poll();
         if (vertex > _maxVertex) {
             _maxVertex = vertex;
@@ -99,7 +90,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     public int add(int u, int v) {
-        // FIXME
         if (contains(u) && contains(v)) {
             if (containsEdges(u, v)) {
                 return u;
@@ -109,16 +99,16 @@ abstract class GraphObj extends Graph {
             GraphNode vNode = _nodeMap.get(v);
             uNode.successor.addFirst(v);
             vNode.predecessor.addFirst(u);
-//            uNode.successor.add(v);
-//            vNode.predecessor.add(u);
             if (isDirected()) {
                 _edgesList.add(new int[]{u, v});
-                _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(u, v), avalId);
+                _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(u, v),
+                    avalId);
             } else {
                 int larger = Math.max(u, v);
                 int smaller = Math.min(u, v);
                 _edgesList.add(new int[]{smaller, larger});
-                _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(smaller, larger), avalId);
+                _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(
+                    smaller, larger), avalId);
                 uNode.predecessor.addFirst(v);
                 vNode.successor.addFirst(u);
             }
@@ -128,17 +118,30 @@ abstract class GraphObj extends Graph {
         }
         return u;
     }
-    
+
+    /** check if contains this edges.
+     * @param u vertex number
+     * @param v vertex number
+     * @return true if exist
+     */
     private boolean containsEdges(int u, int v) {
         if (isDirected()) {
-            return _edgesID.containsKey(new SimpleImmutableEntry<Integer, Integer>(u, v));
+            return _edgesID
+                .containsKey(new SimpleImmutableEntry<Integer, Integer>(u, v));
         } else {
             int larger = Math.max(u, v);
             int smaller = Math.min(u, v);
-            return _edgesID.containsKey(new SimpleImmutableEntry<Integer, Integer>(smaller, larger));
+            return _edgesID
+                .containsKey(new SimpleImmutableEntry<Integer, Integer>(
+                    smaller, larger));
         }
     }
 
+    /** find edge index number.
+     * @param u vertex nummber
+     * @param v vertex number
+     * @return index of this edge
+     */
     private int indexEdges(int u, int v) {
         int count = -1;
         for (int[] tuple : _edgesList) {
@@ -161,12 +164,12 @@ abstract class GraphObj extends Graph {
 
     @Override
     public void remove(int v) {
-        // FIXME
         if (contains(v)) {
             GraphNode gn = _nodeMap.get(v);
             for (Integer preVertex : gn.predecessor) {
                 ArrayDeque<Integer> suc = _nodeMap.get(preVertex).successor;
-                SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(preVertex, v);
+                SimpleImmutableEntry<Integer, Integer> key =
+                    new SimpleImmutableEntry<Integer, Integer>(preVertex, v);
                 if (_edgesID.containsKey(key)) {
                     int oldId = _edgesID.get(key);
                     _pqEdgeId.add(oldId);
@@ -177,7 +180,8 @@ abstract class GraphObj extends Graph {
             }
             for (Integer sucVertex : gn.successor) {
                 ArrayDeque<Integer> prd = _nodeMap.get(sucVertex).predecessor;
-                SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(v, sucVertex);
+                SimpleImmutableEntry<Integer, Integer> key =
+                    new SimpleImmutableEntry<Integer, Integer>(v, sucVertex);
                 if (_edgesID.containsKey(key)) {
                     int oldId = _edgesID.get(key);
                     _pqEdgeId.add(oldId);
@@ -195,7 +199,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     public void remove(int u, int v) {
-        // FIXME
         GraphNode uNode = _nodeMap.get(u);
         GraphNode vNode = _nodeMap.get(v);
         if (uNode != null && vNode != null && containsEdges(u, v)) {
@@ -208,7 +211,8 @@ abstract class GraphObj extends Graph {
                 vNode.successor.remove(u);
                 int larger = Math.max(u, v);
                 int smaller = Math.min(u, v);
-                SimpleImmutableEntry<Integer, Integer> key = new SimpleImmutableEntry<Integer, Integer>(smaller, larger);
+                SimpleImmutableEntry<Integer, Integer> key =
+                    new SimpleImmutableEntry<Integer, Integer>(smaller, larger);
                 int oldId = _edgesID.get(key);
                 _edgesID.remove(key);
                 _pqEdgeId.add(oldId);
@@ -219,13 +223,11 @@ abstract class GraphObj extends Graph {
 
     @Override
     public Iteration<Integer> vertices() {
-        // FIXME
         return Iteration.iteration(_nodeMap.keySet().iterator());
     }
 
     @Override
     public int successor(int v, int k) {
-        // FIXME
         if (contains(v)) {
             GraphNode gn = _nodeMap.get(v);
             if (k >= gn.successor.size() || k < 0) {
@@ -248,7 +250,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     public Iteration<Integer> successors(int v) {
-        // FIXME
         if (contains(v)) {
             GraphNode gn = _nodeMap.get(v);
             return Iteration.iteration(gn.successor.iterator());
@@ -261,19 +262,16 @@ abstract class GraphObj extends Graph {
 
     @Override
     public Iteration<int[]> edges() {
-        // FIXME
         return Iteration.iteration(_edgesList.iterator());
     }
 
     @Override
     protected boolean mine(int v) {
-        // FIXME
         return contains(v);
     }
 
     @Override
     protected void checkMyVertex(int v) {
-        // FIXME
         if (!this.contains(v)) {
             throw new IllegalArgumentException();
         }
@@ -281,7 +279,6 @@ abstract class GraphObj extends Graph {
 
     @Override
     protected int edgeId(int u, int v) {
-        // FIXME
         SimpleImmutableEntry<Integer, Integer> key = null;
         if (isDirected()) {
             key = new SimpleImmutableEntry<Integer, Integer>(u, v);
@@ -297,13 +294,16 @@ abstract class GraphObj extends Graph {
         }
     }
 
-    // FIXME
     /** A graph node class. */
-    class GraphNode {
-        int value;
-        ArrayDeque<Integer> predecessor = new ArrayDeque<Integer>();
-        ArrayDeque<Integer> successor = new ArrayDeque<Integer>();
+    protected class GraphNode {
+        /** value.*/
+        protected int value;
+        /** predecessor list. */
+        protected ArrayDeque<Integer> predecessor = new ArrayDeque<Integer>();
+        /** successor list. */
+        protected ArrayDeque<Integer> successor = new ArrayDeque<Integer>();
     }
+
     /** A PQ, head is the smallest available vertex number. */
     private PriorityQueue<Integer> _pqVertex;
     /** A PQ, head is the smallest available edge id number. */

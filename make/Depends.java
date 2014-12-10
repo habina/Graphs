@@ -7,11 +7,8 @@ import graph.LabeledGraph;
  *  @author Dasheng Chen
  */
 class Depends extends LabeledGraph<Rule, Void> {
-    // REPLACE WITH SOLUTION
     /** An empty dependency graph. */
     Depends() {
         super(new graph.DirectedGraph());
-//        super(null);
     }
-    
 }

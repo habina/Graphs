@@ -1,19 +1,5 @@
 package graph;
 
-/* Do not add or remove public or protected members, or modify the signatures of
- * any public methods.  Do not add or remove public classes.
- *
- * You may make changes that don't affect the API (much) as seen from outside
- * the graph package:
- *   + You may make methods in GraphObj abstract, if you want different
- *     implementations in DirectedGraph and UndirectedGraph.
- *   + You may add bodies to abstract methods, modify existing bodies,
- *     or override inherited methods.
- *   + You may change parameter names, or add 'final' modifiers to parameters.
- *   + You may private and package private members.
- *   + You may add additional non-public classes to the graph package.
- */
-
 /** Represents a general unlabeled graph whose vertices are denoted by
  *  positive integers.  A graph may be directed or undirected.  For
  *  an undirected graph, outgoing and incoming edges are the same.
@@ -125,5 +111,4 @@ public abstract class Graph {
      *  LabeledGraph to number edges so that their labels are easy to
      *  retrieve and set.  */
     protected abstract int edgeId(int u, int v);
-
 }
