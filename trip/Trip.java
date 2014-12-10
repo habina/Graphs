@@ -101,7 +101,7 @@ class Trip {
         String preName = preR.toString();
         String preDir = preR.direction().fullName();
         double preDis = preR.length();
-        DecimalFormat df = new DecimalFormat("#.0");
+        DecimalFormat df = new DecimalFormat("0.0");
         String curName = "";
         String curDir = "";
         String lastName = "";
