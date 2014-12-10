@@ -329,8 +329,8 @@ public class GraphTesting {
     @Test
     public void testSuccessors() {
         DirectedGraph dGraph = new DirectedGraph();
-        assertEquals(null, dGraph.successors(1));
-        assertEquals(null, dGraph.successors(2));
+        assertEquals(false, dGraph.successors(1).hasNext());
+        assertEquals(false, dGraph.successors(2).hasNext());
         dGraph.add();
         dGraph.add();
         dGraph.add();
@@ -351,8 +351,8 @@ public class GraphTesting {
     @Test
     public void testPredecessors() {
         DirectedGraph dGraph = new DirectedGraph();
-        assertEquals(null, dGraph.predecessors(1));
-        assertEquals(null, dGraph.predecessors(2));
+        assertEquals(false, dGraph.predecessors(1).hasNext());
+        assertEquals(false, dGraph.predecessors(2).hasNext());
         dGraph.add();
         dGraph.add();
         dGraph.add();
@@ -376,8 +376,8 @@ public class GraphTesting {
     @Test
     public void testNeighbors() {
         UndirectedGraph uDGraph = new UndirectedGraph();
-        assertEquals(null, uDGraph.neighbors(1));
-        assertEquals(null, uDGraph.neighbors(2));
+        assertEquals(false, uDGraph.neighbors(1).hasNext());
+        assertEquals(false, uDGraph.neighbors(2).hasNext());
         uDGraph.add();
         uDGraph.add();
         uDGraph.add();
@@ -522,6 +522,12 @@ public class GraphTesting {
         g.remove(10);
         assertEquals(6, g.edgeSize());
         assertEquals(9, g.maxVertex());
+        g.remove(2, 6);
+        assertEquals(5, g.edgeSize());
+        assertEquals(9, g.maxVertex());
+        g.remove(7, 3);
+        assertEquals(4, g.edgeSize());
+        assertEquals(9, g.maxVertex());
     }
 
     @Test
@@ -601,6 +607,12 @@ public class GraphTesting {
         assertEquals(10, g.maxVertex());
         g.remove(10);
         assertEquals(6, g.edgeSize());
+        assertEquals(9, g.maxVertex());
+        g.remove(10, 9);
+        assertEquals(6, g.edgeSize());
+        assertEquals(9, g.maxVertex());
+        g.remove(8, 9);
+        assertEquals(5, g.edgeSize());
         assertEquals(9, g.maxVertex());
     }
 

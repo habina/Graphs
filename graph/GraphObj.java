@@ -98,8 +98,12 @@ abstract class GraphObj extends Graph {
             int avalId = _pqEdgeId.poll();
             GraphNode uNode = _nodeMap.get(u);
             GraphNode vNode = _nodeMap.get(v);
-            uNode.successor.add(v);
-            vNode.predecessor.add(u);
+            if (!uNode.successor.contains(v)) {
+                uNode.successor.add(v);
+            }
+            if (!vNode.predecessor.contains(u)) {
+                vNode.predecessor.add(u);
+            }
             if (isDirected()) {
                 _edgesList.add(new int[]{u, v});
                 _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(u, v),
@@ -110,8 +114,12 @@ abstract class GraphObj extends Graph {
                 _edgesList.add(new int[]{smaller, larger});
                 _edgesID.put(new SimpleImmutableEntry<Integer, Integer>(
                     smaller, larger), avalId);
-                uNode.predecessor.add(v);
-                vNode.successor.add(u);
+                if (!uNode.predecessor.contains(v)) {
+                    uNode.predecessor.add(v);
+                }
+                if (!vNode.successor.contains(u)) {
+                    vNode.successor.add(u);
+                }
             }
             if (_pqEdgeId.isEmpty()) {
                 _pqEdgeId.offer(_edgesList.size() + 1);
@@ -260,8 +268,10 @@ abstract class GraphObj extends Graph {
         if (contains(v)) {
             GraphNode gn = _nodeMap.get(v);
             return Iteration.iteration(gn.successor.iterator());
+        } else {
+            ArrayDeque<Integer> empty = new ArrayDeque<Integer>();
+            return Iteration.iteration(empty.iterator());
         }
-        return null;
     }
 
     @Override

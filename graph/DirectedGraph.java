@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayDeque;
+
 /** Represents a general unlabeled directed graph whose vertices are denoted by
  *  positive integers. Graphs may have self edges.
  *
@@ -44,7 +46,9 @@ public class DirectedGraph extends GraphObj {
         if (contains(v)) {
             return Iteration.iteration(this._nodeMap.get(v).predecessor
                 .iterator());
+        } else {
+            ArrayDeque<Integer> empty = new ArrayDeque<Integer>();
+            return Iteration.iteration(empty.iterator());
         }
-        return null;
     }
 }
